@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import absolute_import, unicode_literals
 
 import os
@@ -12,6 +11,7 @@ version = __import__('filer').__version__
 def read(fname):
     # read the contents of a text file
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
     name="django-filer",
@@ -26,9 +26,9 @@ setup(
     author_email='stefan@foulis.ch',
     packages=find_packages(),
     install_requires=(
-        'Django>=1.8,<1.11.999',  # Django is known to use rc versions
+        'Django>=1.8,<2.2',  # Django is known to use rc versions
         'easy-thumbnails>=2,<3.0',
-        'django-mptt>=0.6,<0.9',  # the exact version depends on Django
+        'django-mptt>=0.6,<1.0',  # the exact version depends on Django
         'django_polymorphic>=0.7,<2.1',
         'Unidecode>=1.0,<1.1',
     ),

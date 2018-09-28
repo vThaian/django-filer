@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
 import os
@@ -9,12 +9,12 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict as model_to_dict_django
 from django.test import TestCase
 from filer.test_utils.extended_app.models import ExtImage, Video
 
 from .. import settings as filer_settings
+from ..utils.compatibility import reverse
 from ..admin.folderadmin import FolderAdmin
 from ..models.filemodels import File
 from ..models.foldermodels import Folder, FolderPermission
@@ -72,7 +72,7 @@ class FilerFolderAdminUrlsTests(TestCase):
                                     })
         self.assertEqual(Folder.objects.count(), 1)
         self.assertEqual(Folder.objects.all()[0].name, FOLDER_NAME)
-        #TODO: not sure why the status code is 200
+        # TODO: not sure why the status code is 200
         self.assertEqual(response.status_code, 200)
 
     def test_filer_remember_last_opened_directory(self):

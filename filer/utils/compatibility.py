@@ -5,8 +5,24 @@ import sys
 
 import django
 from django.utils import six
-from django.utils.functional import allow_lazy
 from django.utils.text import Truncator
+try:
+    # for django1.10 and newest
+    from django.urls import reverse, NoReverseMatch
+except ImportError:
+    from django.core.urlresolvers import reverse, NoReverseMatch
+
+try:
+    from django.utils.functional import keep_lazy as allow_lazy
+except ImportError:
+    from django.utils.functional import allow_lazy
+
+
+def is_authenticated(user):
+    try:
+        return user.is_authenticated()  # Django<1.10
+    except TypeError:
+        return user.is_authenticated  # Django 1.10 - 2.x
 
 
 def truncate_words(s, num, end_text='...'):
@@ -63,6 +79,7 @@ def get_delete_permission(opts):
     except ImportError:
         return '%s.%s' % (opts.app_label,
                           opts.get_delete_permission())
+
 
 try:
     from django.contrib.admin.utils import unquote, quote, NestedObjects, capfirst  # flake8: noqa
